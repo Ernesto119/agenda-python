@@ -10,30 +10,32 @@ def lisitado_de_tareas():
     listado.close()    
 
 def agregar_tarea():
-    a ="cocinar"
+    hora = time.strftime("%I:%M:%p %d/%m/%Y")
+    a =f"caminar {hora}"
     agregar = open("guardado.txt","a")
     agregar.write("\n" + a)
-    print("h")
     agregar.close()
+    
+def modificar_tarea():
+    pass
     
 def eliminar_tarea():
     pass
 
-
 def completar_tarea():
     pass
 
-def modificar_tarea():
-    pass
 
 
 
 menu ="""Menu
 1.Lista de tareas
 2.Agregar tarea
-3.Eliminar tarea
-4.Completar tarea
-5.Salir
+3.Modificar tarea
+4.Guardar tarea
+5.Eliminar tarea
+6.Completar tarea
+7.Salir
 """
 
 print(menu)
