@@ -1,6 +1,3 @@
-cocinar huevos fritos
-limpiar limpiar la sala
-cocinar
 cocinar
 cocinar
 cocinar10:56:PM 03/03/2024
@@ -9,3 +6,6 @@ cocinar 10:57:PM 03/03/2024
 cocinar 11:26:PM 03/03/2024
 caminar 11:27:PM 03/03/2024
 caminar 11:28:PM 03/03/2024
+caminar 03:49:PM 04/03/2024
+caminar 03:49:PM 04/03/2024
+ñ 04:07:PM 04/03/2024
