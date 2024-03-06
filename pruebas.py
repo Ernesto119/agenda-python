@@ -1,5 +1,3 @@
-a =["alas","escobas","queso"]
+a = [2,3,4,"1"]
 
-a.remove(a[3-1])
-
-print(a)
+print(sum([int(x) for x in a]))
