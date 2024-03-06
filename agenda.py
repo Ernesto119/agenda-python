@@ -54,14 +54,14 @@ def completar_tarea(estado):
     eliminar_tarea(estado)
 
 
+
 menu ="""Menu
 1.Lista de tareas
 2.Agregar tarea
 3.Modificar tarea
-4.Guardar tarea
-5.Eliminar tarea
-6.Completar tarea
-7.Salir
+4.Eliminar tarea
+5.Completar tarea
+6.Salir
 """
 
 
@@ -74,7 +74,7 @@ while True:
     if opcion == "1":
         
         print("1.Tareas pendiente \n2.Tareas completadas")
-        elegir = int(input("seleccione"))
+        elegir = int(input("seleccione una opcion: "))
 
         if elegir == 1:
 
@@ -133,7 +133,7 @@ while True:
 
             salir = True
             while salir == True:
-                
+
                 try:
                     lisitado_de_tareas()
                     eliminar = int(input("Elija por el por orden: "))
