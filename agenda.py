@@ -1,5 +1,6 @@
 import os
 import time
+import pruebas
 
 def lista_de_tareas_completadas():
     listado = open("completado.txt","r",encoding="utf-8")
@@ -88,6 +89,10 @@ while True:
             input("Presione enter para regresar")
             os.system("cls" if os.name == "nt" else "clear")
 
+        else:
+
+            os.system("cls" if os.name == "nt" else "clear")
+            print("opcion invalida")
 
     elif opcion == "2":
         
@@ -104,26 +109,32 @@ while True:
             os.system("cls" if os.name == "nt" else "clear")
 
     elif opcion == "3":
-        
-        salir = True
-        while salir == True:
-            
-            lisitado_de_tareas()
-            elegir = int(input("Elija por el por orden: "))
-            modificar = input("Ingrese la nueva tarea: ")
-            modificar_tarea(elegir,modificar)
-            elegir = input("Ingrese N para salir o enter para continuar: ")
-            if elegir == "n" or elegir == "N":
+        if  os.path.getsize("pendientes.txt") == 0:
 
-                salir = False
-            
-            os.system("cls" if os.name == "nt" else "clear")
+            print("no hay tareas")
+
+        else:
+
+            salir = True
+            while salir == True:
+
+                try:
+                    lisitado_de_tareas()
+                    elegir = int(input("Elija por el por orden: "))
+                    modificar = input("Ingrese la nueva tarea: ")
+                    modificar_tarea(elegir,modificar)
+                    elegir = input("Ingrese N para salir o enter para continuar: ")
+                    os.system("cls" if os.name == "nt" else "clear")
+                    if elegir == "n" or elegir == "N":
+                         salir = False
+
+                except:
+                    os.system("cls" if os.name == "nt" else "clear")
+                    print("Opcion invalidad")
+                   
+                
 
     elif opcion == "4":
-
-        print(completar_tarea())
-
-    elif opcion == "5":
 
         if  os.path.getsize("pendientes.txt") == 0:
 
@@ -144,13 +155,13 @@ while True:
                     os.system("cls" if os.name == "nt" else "clear")
                     print("Ingrese una opcion vakida")
 
-    elif opcion == "6":
+    elif opcion == "5":
 
         lisitado_de_tareas()
         completa = int(input("Ingrese para completar: "))
         completar_tarea(completa)
 
-    elif opcion == "7":
+    elif opcion == "6":
 
         print("Adios")
         break
