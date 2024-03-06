@@ -1,11 +1,11 @@
 import os
 import time
-import pruebas
 
 def lista_de_tareas_completadas():
     listado = open("completado.txt","r",encoding="utf-8")
-    leer = listado.readlines()
-    enumerada = [f"{1+enum}. {elem}" for enum, elem in enumerate(leer)]#muestra la informacion  estilo cascada y enumera cada tarea
+    leer = listado.readlines()#conierve el contenido del archivo en una lista
+    enumerada = [f"{1+enum}. {elem}" for enum, elem in enumerate(leer)]
+    #El contenido de la lista "leer" se imprimira linea por linea y seran enumerada por su posicion + 1
     print("".join(enumerada))
     listado.close()    
 
@@ -13,13 +13,13 @@ def lisitado_de_tareas():
     
     listado = open("pendientes.txt","r",encoding="utf-8")
     leer = listado.readlines()
-    enumerada = [f"{1+enum}. {elem}" for enum, elem in enumerate(leer)]#muestra la informacion  estilo cascada y enumera cada tarea
+    enumerada = [f"{1+enum}. {elem}" for enum, elem in enumerate(leer)]
     print("".join(enumerada))
     listado.close()    
-
+#muestra la informacion  estilo cascada y enumera cada tarea
 def agregar_tarea(usuario):
 
-    hora = time.strftime("/fecha: %I:%M:%p %d/%m/%Y")
+    hora = time.strftime("/fecha: %I:%M:%p %d/%m/%Y") #agrega la hora y la fecha del sistema a la tarea
     insetar =f"{usuario} /Pendiente {hora}"
     agregar = open("pendientes.txt","a")
     agregar.write(insetar + "\n")
@@ -34,13 +34,12 @@ def modificar_tarea(seleccion,usuario):
     lista = open("pendientes.txt","w")
     lista.writelines(modificar)
     lista.close()
-
-
+    
 def eliminar_tarea(usuario):
 
     lista =  open("pendientes.txt","r+",encoding="utf-8")
     seleccion = lista.readlines()
-    seleccion.remove(seleccion[usuario-1])#remover lo que el usuario ingrese
+    seleccion.remove(seleccion[usuario-1])
     lista = open("pendientes.txt","w")
     lista.writelines(seleccion)
     lista.close()
@@ -53,8 +52,8 @@ def completar_tarea(estado):
     c = leer[estado-1]
     completado.write(c.replace("Pendiente","Completado"))
     eliminar_tarea(estado)
-
-
+    # copiara la tarea del archivo "pendiente" y la pondra en el archivo "completado" replazando el string pendiente por Completado ademas,
+    #eliminara del primer archivo archivo  la tarea elegida por el usuario
 
 menu ="""Menu
 1.Lista de tareas
@@ -70,7 +69,7 @@ while True:
 
     print(menu)
     opcion = (input("Seleccione una opcion: "))
-    os.system("cls" if os.name == "nt" else "clear") # Limpia la panatalla de los usuarios de Linux,Mac y Windows
+    os.system("cls" if os.name == "nt" else "clear") # el modulo limpiara la panatalla de los usuarios de Linux,Mac y Windows
     
     if opcion == "1":
         
@@ -156,10 +155,15 @@ while True:
                     print("Ingrese una opcion vakida")
 
     elif opcion == "5":
+        if  os.path.getsize("pendientes.txt") == 0:
 
-        lisitado_de_tareas()
-        completa = int(input("Ingrese para completar: "))
-        completar_tarea(completa)
+            print("No hay tareas")
+
+        else:
+
+            lisitado_de_tareas()
+            completa = int(input("Ingrese para completar: "))
+            completar_tarea(completa)
 
     elif opcion == "6":
 
