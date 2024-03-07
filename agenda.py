@@ -20,7 +20,7 @@ def lisitado_de_tareas():
 def agregar_tarea(usuario):
 
     hora = time.strftime("/fecha: %I:%M:%p %d/%m/%Y") #agrega la hora y la fecha del sistema a la tarea
-    insetar =f"{usuario} /Pendiente {hora}"
+    insetar =f"{usuario.capitalize()} /Pendiente {hora}"
     agregar = open("pendientes.txt","a")
     agregar.write(insetar + "\n")
     agregar.close()
@@ -30,7 +30,7 @@ def modificar_tarea(seleccion,usuario):
     hora = time.strftime("/fecha: %I:%M:%p %d/%m/%Y") 
     lista =  open("pendientes.txt","r+",encoding="utf-8")
     modificar = lista.readlines()
-    nueva_tarea = f"{usuario} /Pendiente {hora}"
+    nueva_tarea = f"{usuario.capitalize()} /Pendiente {hora}"
     modificar[seleccion-1] = nueva_tarea
     lista = open("pendientes.txt","w")
     lista.writelines(modificar)
@@ -78,7 +78,7 @@ while True:
 
     print(menu)
     opcion = (input("Seleccione una opcion: "))
-    os.system("cls" if os.name == "nt" else "clear") # el modulo limpiara la panatalla de los usuarios de Linux,Mac y Windows
+    os.system("cls" if os.name == "nt" else "clear")# el modulo limpiara la panatalla de los usuarios de Linux,Mac y Windows
     
     if opcion == "1":
         
