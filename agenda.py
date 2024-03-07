@@ -26,10 +26,11 @@ def agregar_tarea(usuario):
     agregar.close()
     
 def modificar_tarea(seleccion,usuario):
-
+    
+    hora = time.strftime("/fecha: %I:%M:%p %d/%m/%Y") 
     lista =  open("pendientes.txt","r+",encoding="utf-8")
     modificar = lista.readlines()
-    nueva_tarea = usuario
+    nueva_tarea = f"{usuario} /Pendiente {hora}"
     modificar[seleccion-1] = nueva_tarea
     lista = open("pendientes.txt","w")
     lista.writelines(modificar)
@@ -43,6 +44,13 @@ def eliminar_tarea(usuario):
     lista = open("pendientes.txt","w")
     lista.writelines(seleccion)
     lista.close()
+
+def vaciar_completadas():
+    lista =  open("completado.txt","w")
+    lista.truncate(0)
+    lista.close
+    print("borrado")
+
     
 def completar_tarea(estado):
 
@@ -55,6 +63,7 @@ def completar_tarea(estado):
     # copiara la tarea del archivo "pendiente" y la pondra en el archivo "completado" replazando el string pendiente por Completado ademas,
     #eliminara del primer archivo archivo  la tarea elegida por el usuario
 
+#menu principal
 menu ="""Menu
 1.Lista de tareas
 2.Agregar tarea
@@ -74,15 +83,15 @@ while True:
     if opcion == "1":
         
         print("1.Tareas pendiente \n2.Tareas completadas")
-        elegir = int(input("seleccione una opcion: "))
+        elegir = input("seleccione una opcion: ")
 
-        if elegir == 1:
+        if elegir == "1":
 
             lisitado_de_tareas()
             input("Presione enter para regresar")
             os.system("cls" if os.name == "nt" else "clear")
 
-        elif elegir == 2:
+        elif elegir == "2":
 
             lista_de_tareas_completadas()
             input("Presione enter para regresar")
@@ -97,16 +106,19 @@ while True:
         
         salir = True
         while salir == True:
-
             agregar = input("Ingrese la tarea: ")
-            agregar_tarea(agregar)
+            if len(agregar) > 0:
+              
+                agregar_tarea(agregar)
 
-            elegir = input("Ingrese N para salir o enter para continuar: ")
-            if elegir == "n" or elegir == "N":
-                salir = False
-            
-            os.system("cls" if os.name == "nt" else "clear")
-
+                elegir = input("Ingrese N para salir o enter para continuar: ")
+                if elegir.upper() == "N":
+                    salir = False
+                
+                os.system("cls" if os.name == "nt" else "clear")
+            else:
+                print("Ingrese alguna tarea")
+                
     elif opcion == "3":
         if  os.path.getsize("pendientes.txt") == 0:
 
@@ -118,6 +130,7 @@ while True:
             while salir == True:
 
                 try:
+
                     lisitado_de_tareas()
                     elegir = int(input("Elija por el por orden: "))
                     modificar = input("Ingrese la nueva tarea: ")
@@ -130,29 +143,35 @@ while True:
                 except:
                     os.system("cls" if os.name == "nt" else "clear")
                     print("Opcion invalidad")
-                   
-                
-
+                       
     elif opcion == "4":
 
-        if  os.path.getsize("pendientes.txt") == 0:
+        print("1.Eliminar tareas pendiente\n2.Vaciar lista de tareas completadas")
+        seleccion = input("que desea hacer: ")
 
-            print("no hay tareas")
+        if seleccion == "1":
+            if  os.path.getsize("pendientes.txt") == 0:
 
-        else:
+                print("no hay tareas")
 
-            salir = True
-            while salir == True:
+            else:
 
-                try:
-                    lisitado_de_tareas()
-                    eliminar = int(input("Elija por el por orden: "))
-                    eliminar_tarea(eliminar)
-                    input("Presione enter para volver")
-                    salir = False
-                except:
-                    os.system("cls" if os.name == "nt" else "clear")
-                    print("Ingrese una opcion vakida")
+                salir = True
+                while salir == True:
+
+                    try:
+                        lisitado_de_tareas()
+                        eliminar = int(input("Elija por el por orden: "))
+                        eliminar_tarea(eliminar)
+                        input("Presione enter para volver")
+                        salir = False
+                    except:
+                        os.system("cls" if os.name == "nt" else "clear")
+                        print("Ingrese una opcion vakida")
+
+        elif seleccion == "2":
+
+            vaciar_completadas()
 
     elif opcion == "5":
         if  os.path.getsize("pendientes.txt") == 0:

@@ -1,3 +1,10 @@
-a = [10,2,1,4]
+a = 9119
+l =[]
+# for x in str(a):
+#     c = int(x)**2
+#     l.append(str(c))
+# print("".join(l))
 
-print(min(a[1::]))
+
+
+print(int("".join([str(int(x)**2) for x in str(a)])))
