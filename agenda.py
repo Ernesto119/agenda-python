@@ -165,9 +165,10 @@ while True:
                         eliminar_tarea(eliminar)
                         input("Presione enter para volver")
                         salir = False
+                        os.system("cls" if os.name == "nt" else "clear")
                     except:
                         os.system("cls" if os.name == "nt" else "clear")
-                        print("Ingrese una opcion vakida")
+                        print("Ingrese una opcion valiida")
 
         elif seleccion == "2":
 
